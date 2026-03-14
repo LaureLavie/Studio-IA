@@ -55,7 +55,7 @@ jobs:
 
       # 4. Build + Push — Backend Node.js/Express
       - name: Build & Push Backend
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./backend
           platforms: linux/amd64
@@ -68,7 +68,7 @@ jobs:
 
       # 5. Build + Push — Frontend Next.js
       - name: Build & Push Frontend
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./frontend
           platforms: linux/amd64
@@ -83,7 +83,7 @@ jobs:
 
       # 6. Build + Push — Nginx
       - name: Build & Push Nginx
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: ./nginx
           platforms: linux/amd64
