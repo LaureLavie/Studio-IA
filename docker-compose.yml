@@ -1,0 +1,44 @@
+services:
+
+  nginx:
+    image: ${DOCKERHUB_USERNAME:-lorlaviedevdesign}/studio-nginx:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certbot-certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+    depends_on:
+      - frontend
+      - backend
+    restart: unless-stopped
+
+  certbot:
+    image: certbot/certbot
+    volumes:
+      - certbot-certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+    # Lancer manuellement la 1ère fois :
+    # docker compose run certbot certonly --webroot -w /var/www/certbot -d TON_DOMAINE.com --email lorlaviedevdesign@gmail.com --agree-tos --non-interactive
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    restart: unless-stopped
+
+  frontend:
+    image: ${DOCKERHUB_USERNAME:-lorlaviedevdesign}/studio-frontend:latest
+    # NEXT_PUBLIC_API_URL est compilé dans l'image (--build-arg dans deploy.yml).
+    # En prod, l'image est buildée avec /api → Nginx route /api vers backend:4000.
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  backend:
+    image: ${DOCKERHUB_USERNAME:-lorlaviedevdesign}/studio-backend:latest
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+volumes:
+  certbot-certs:
+  certbot-www:

@@ -1,0 +1,785 @@
+/* ============================================================
+   ÉTHER — Design System Global
+   Studio de Création Multimédia IA
+   Adapté pour Next.js 14
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Kodchasan:wght@300;400;600&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;0,6..12,600;1,6..12,300&display=swap');
+
+/* ── 1. TOKENS ───────────────────────────────────────────────── */
+:root {
+  /* Fonds */
+  --ether-bg-base:     #0A0A0B;
+  --ether-bg-surface:  #111114;
+  --ether-bg-elevated: #1A1A1F;
+  --ether-bg-overlay:  #2D2D30;
+
+  /* Violet */
+  --ether-violet:        #8A2BE2;
+  --ether-violet-light:  #A855F7;
+  --ether-violet-faint:  rgba(138, 43, 226, 0.12);
+  --ether-violet-glow:   rgba(138, 43, 226, 0.25);
+  --ether-violet-border: rgba(138, 43, 226, 0.35);
+
+  /* Cyan */
+  --ether-cyan:        #00F5FF;
+  --ether-cyan-faint:  rgba(0, 245, 255, 0.08);
+  --ether-cyan-border: rgba(0, 245, 255, 0.25);
+  --ether-cyan-glow:   rgba(0, 245, 255, 0.4);
+
+  /* Texte */
+  --ether-text-primary:   #FFFFFF;
+  --ether-text-secondary: #A0A0AA;
+  --ether-text-muted:     #606068;
+  --ether-text-ghost:     #353538;
+
+  /* Bordures */
+  --ether-border-subtle:  rgba(255,255,255,0.05);
+  --ether-border-default: rgba(255,255,255,0.08);
+  --ether-border-visible: rgba(255,255,255,0.12);
+  --ether-border-strong:  rgba(255,255,255,0.20);
+
+  /* Glass */
+  --ether-glass-bg:       rgba(255,255,255,0.035);
+  --ether-glass-border:   rgba(255,255,255,0.07);
+  --ether-glass-bg-hover: rgba(255,255,255,0.055);
+
+  /* Rayons */
+  --ether-radius-sm:   8px;
+  --ether-radius-md:   12px;
+  --ether-radius-lg:   16px;
+  --ether-radius-xl:   24px;
+  --ether-radius-full: 9999px;
+
+  /* Typo */
+  --ether-font-display: 'Kodchasan', sans-serif;
+  --ether-font-body:    'Nunito Sans', sans-serif;
+
+  /* Ombres */
+  --ether-shadow-sm:     0 2px 8px rgba(0,0,0,0.4);
+  --ether-shadow-md:     0 4px 20px rgba(0,0,0,0.6);
+  --ether-shadow-lg:     0 8px 40px rgba(0,0,0,0.8);
+  --ether-shadow-violet: 0 4px 24px rgba(138,43,226,0.3);
+  --ether-shadow-cyan:   0 4px 24px rgba(0,245,255,0.2);
+
+  /* Transitions */
+  --ether-t-fast:   150ms ease;
+  --ether-t-normal: 250ms ease;
+  --ether-t-slow:   400ms ease;
+}
+
+/* ── 2. RESET ────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ether-bg-base);
+  color: var(--ether-text-primary);
+  font-family: var(--ether-font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  min-height: 100vh;
+  /* Grain de fond subtil */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--ether-violet-glow);
+  color: var(--ether-text-primary);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--ether-bg-base); }
+::-webkit-scrollbar-thumb {
+  background: var(--ether-bg-overlay);
+  border-radius: var(--ether-radius-full);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--ether-violet); }
+
+/* ── 3. TYPOGRAPHIE ──────────────────────────────────────────── */
+.ether-display {
+  font-family: var(--ether-font-display);
+  font-weight: 300;
+  font-size: clamp(32px, 5vw, 56px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ether-text-primary);
+  line-height: 1.1;
+}
+
+.ether-display-gradient {
+  font-family: var(--ether-font-display);
+  font-weight: 300;
+  font-size: clamp(32px, 5vw, 56px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--ether-violet) 0%, var(--ether-violet-light) 50%, var(--ether-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+}
+
+.ether-h1 {
+  font-family: var(--ether-font-display);
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: 0.06em;
+  color: var(--ether-text-primary);
+}
+
+.ether-h2 {
+  font-family: var(--ether-font-display);
+  font-weight: 400;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  color: var(--ether-text-primary);
+}
+
+.ether-h3 {
+  font-family: var(--ether-font-display);
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: var(--ether-text-primary);
+}
+
+.ether-label {
+  font-family: var(--ether-font-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ether-text-muted);
+}
+
+.ether-body {
+  font-family: var(--ether-font-body);
+  font-size: 14px;
+  color: var(--ether-text-secondary);
+  line-height: 1.7;
+}
+
+.ether-body-sm {
+  font-family: var(--ether-font-body);
+  font-size: 12px;
+  color: var(--ether-text-muted);
+  line-height: 1.6;
+}
+
+.ether-text-violet { color: var(--ether-violet-light); }
+.ether-text-cyan   { color: var(--ether-cyan); }
+.ether-text-muted  { color: var(--ether-text-muted); }
+
+/* ── 4. LAYOUT ───────────────────────────────────────────────── */
+.ether-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.ether-page {
+  padding: 32px 24px;
+  min-height: 100vh;
+}
+
+/* ── 5. NAVIGATION ───────────────────────────────────────────── */
+.ether-nav {
+  background: rgba(10,10,11,0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--ether-border-subtle);
+  padding: 0 24px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.ether-nav-logo {
+  font-family: var(--ether-font-display);
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--ether-violet-light), var(--ether-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+}
+
+/* Tabs pill */
+.ether-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--ether-border-subtle);
+  border-radius: var(--ether-radius-full);
+  padding: 4px;
+  overflow-x: auto;
+}
+
+.ether-tab {
+  font-family: var(--ether-font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ether-text-muted);
+  padding: 8px 16px;
+  border-radius: var(--ether-radius-full);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--ether-t-fast);
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ether-tab:hover { color: var(--ether-text-secondary); }
+
+.ether-tab.active,
+.ether-tab[data-active="true"] {
+  background: var(--ether-violet-faint);
+  color: var(--ether-violet-light);
+  border-color: var(--ether-violet-border);
+}
+
+/* ── 6. CARTES ───────────────────────────────────────────────── */
+.ether-card {
+  background: var(--ether-glass-bg);
+  border: 1px solid var(--ether-glass-border);
+  border-radius: var(--ether-radius-lg);
+  padding: 20px;
+  transition: background var(--ether-t-normal), border-color var(--ether-t-normal);
+}
+
+.ether-card:hover {
+  background: var(--ether-glass-bg-hover);
+  border-color: var(--ether-border-visible);
+}
+
+.ether-card-violet {
+  background: var(--ether-violet-faint);
+  border: 1px solid var(--ether-violet-border);
+  border-radius: var(--ether-radius-lg);
+  padding: 20px;
+  transition: all var(--ether-t-normal);
+}
+
+.ether-card-elevated {
+  background: var(--ether-bg-surface);
+  border: 1px solid var(--ether-border-default);
+  border-radius: var(--ether-radius-xl);
+  padding: 28px;
+  box-shadow: var(--ether-shadow-md);
+}
+
+/* ── 7. BOUTONS ──────────────────────────────────────────────── */
+.ether-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--ether-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: var(--ether-radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--ether-t-fast);
+  white-space: nowrap;
+  padding: 10px 22px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.ether-btn:active { transform: scale(0.97); }
+.ether-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.ether-btn-primary {
+  background: linear-gradient(135deg, var(--ether-violet), #6a1fad);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(138,43,226,0.35);
+}
+.ether-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--ether-violet-light), var(--ether-violet));
+  box-shadow: var(--ether-shadow-violet);
+  transform: translateY(-1px);
+}
+
+.ether-btn-ghost {
+  background: transparent;
+  color: var(--ether-violet-light);
+  border: 1px solid var(--ether-violet-border);
+}
+.ether-btn-ghost:hover:not(:disabled) {
+  background: var(--ether-violet-faint);
+  border-color: var(--ether-violet-light);
+}
+
+.ether-btn-cyan {
+  background: transparent;
+  color: var(--ether-cyan);
+  border: 1px solid var(--ether-cyan-border);
+}
+.ether-btn-cyan:hover:not(:disabled) {
+  background: var(--ether-cyan-faint);
+  border-color: var(--ether-cyan);
+  box-shadow: var(--ether-shadow-cyan);
+}
+
+.ether-btn-surface {
+  background: var(--ether-bg-elevated);
+  color: var(--ether-text-secondary);
+  border: 1px solid var(--ether-border-default);
+}
+.ether-btn-surface:hover:not(:disabled) {
+  background: var(--ether-bg-overlay);
+  color: var(--ether-text-primary);
+}
+
+.ether-btn-sm { padding: 7px 14px; font-size: 11px; }
+.ether-btn-lg { padding: 14px 28px; font-size: 13px; }
+.ether-btn-full { width: 100%; }
+
+/* ── 8. FORMULAIRES ──────────────────────────────────────────── */
+.ether-field-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ether-text-muted);
+  margin-bottom: 8px;
+}
+
+.ether-input {
+  width: 100%;
+  background: var(--ether-bg-elevated);
+  border: 1px solid var(--ether-border-default);
+  border-radius: var(--ether-radius-md);
+  padding: 12px 16px;
+  font-family: var(--ether-font-body);
+  font-size: 14px;
+  color: var(--ether-text-primary);
+  outline: none;
+  transition: border-color var(--ether-t-fast), box-shadow var(--ether-t-fast);
+  line-height: 1.5;
+}
+.ether-input::placeholder { color: var(--ether-text-muted); font-style: italic; }
+.ether-input:hover { border-color: var(--ether-border-visible); }
+.ether-input:focus {
+  border-color: var(--ether-violet-border);
+  box-shadow: 0 0 0 3px var(--ether-violet-faint);
+}
+
+.ether-textarea {
+  width: 100%;
+  background: var(--ether-bg-elevated);
+  border: 1px solid var(--ether-border-default);
+  border-radius: var(--ether-radius-lg);
+  padding: 16px;
+  font-family: var(--ether-font-body);
+  font-size: 14px;
+  color: var(--ether-text-primary);
+  outline: none;
+  resize: vertical;
+  min-height: 100px;
+  transition: border-color var(--ether-t-fast), box-shadow var(--ether-t-fast);
+  line-height: 1.6;
+}
+.ether-textarea::placeholder { color: var(--ether-text-muted); font-style: italic; }
+.ether-textarea:hover { border-color: var(--ether-border-visible); }
+.ether-textarea:focus {
+  border-color: var(--ether-violet-border);
+  box-shadow: 0 0 0 3px var(--ether-violet-faint);
+}
+
+.ether-prompt-area {
+  width: 100%;
+  background: rgba(138,43,226,0.04);
+  border: 1px solid var(--ether-violet-glow);
+  border-radius: var(--ether-radius-xl);
+  padding: 20px;
+  font-family: var(--ether-font-body);
+  font-size: 15px;
+  color: var(--ether-text-primary);
+  outline: none;
+  resize: none;
+  min-height: 120px;
+  transition: all var(--ether-t-normal);
+  line-height: 1.7;
+}
+.ether-prompt-area::placeholder { color: var(--ether-text-ghost); font-style: italic; }
+.ether-prompt-area:focus {
+  background: rgba(138,43,226,0.06);
+  border-color: var(--ether-violet-light);
+  box-shadow: 0 0 0 4px rgba(138,43,226,0.08), var(--ether-shadow-violet);
+}
+
+.ether-select {
+  appearance: none;
+  width: 100%;
+  background: var(--ether-bg-elevated);
+  border: 1px solid var(--ether-border-default);
+  border-radius: var(--ether-radius-md);
+  padding: 11px 40px 11px 16px;
+  font-family: var(--ether-font-body);
+  font-size: 14px;
+  color: var(--ether-text-primary);
+  cursor: pointer;
+  outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23606068' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  transition: border-color var(--ether-t-fast);
+}
+.ether-select:focus { border-color: var(--ether-violet-border); }
+.ether-select option { background: var(--ether-bg-elevated); }
+
+.ether-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: var(--ether-radius-full);
+  background: var(--ether-bg-elevated);
+  outline: none;
+  border: 1px solid var(--ether-border-default);
+  cursor: pointer;
+}
+.ether-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--ether-violet-light);
+  cursor: pointer;
+  border: 2px solid var(--ether-bg-base);
+  box-shadow: 0 0 8px var(--ether-violet-glow);
+  transition: box-shadow var(--ether-t-fast);
+}
+.ether-slider::-webkit-slider-thumb:hover { box-shadow: 0 0 16px var(--ether-violet-glow); }
+
+/* ── 9. TAGS & BADGES ────────────────────────────────────────── */
+.ether-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: var(--ether-radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+.ether-tag-violet {
+  background: var(--ether-violet-faint);
+  color: var(--ether-violet-light);
+  border: 1px solid var(--ether-violet-glow);
+}
+.ether-tag-cyan {
+  background: var(--ether-cyan-faint);
+  color: var(--ether-cyan);
+  border: 1px solid var(--ether-cyan-border);
+}
+.ether-tag-surface {
+  background: var(--ether-bg-elevated);
+  color: var(--ether-text-muted);
+  border: 1px solid var(--ether-border-default);
+}
+
+.ether-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--ether-radius-full);
+  font-size: 11px;
+  font-weight: 600;
+}
+.ether-badge::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.ether-badge-live {
+  background: var(--ether-cyan-faint);
+  color: var(--ether-cyan);
+  border: 1px solid var(--ether-cyan-border);
+}
+.ether-badge-live::before {
+  background: var(--ether-cyan);
+  box-shadow: 0 0 6px var(--ether-cyan);
+  animation: ether-pulse 2s infinite;
+}
+
+/* ── 10. COMPOSANTS SPÉCIAUX ─────────────────────────────────── */
+.ether-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ether-cyan);
+  box-shadow: 0 0 8px var(--ether-cyan);
+  animation: ether-pulse 2s infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.ether-divider {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ether-border-visible) 20%, var(--ether-border-visible) 80%, transparent);
+  margin: 24px 0;
+}
+
+.ether-divider-violet {
+  background: linear-gradient(90deg, transparent, var(--ether-violet-glow) 20%, var(--ether-violet-glow) 80%, transparent);
+}
+
+.ether-progress-track {
+  width: 100%;
+  height: 4px;
+  background: var(--ether-bg-elevated);
+  border-radius: var(--ether-radius-full);
+  overflow: hidden;
+}
+.ether-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ether-violet), var(--ether-cyan));
+  border-radius: var(--ether-radius-full);
+  transition: width var(--ether-t-slow);
+}
+
+.ether-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--ether-border-default);
+  border-top-color: var(--ether-violet-light);
+  border-radius: 50%;
+  animation: ether-spin 0.8s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.ether-skeleton {
+  background: linear-gradient(90deg, var(--ether-bg-elevated) 25%, var(--ether-bg-overlay) 50%, var(--ether-bg-elevated) 75%);
+  background-size: 200% 100%;
+  animation: ether-shimmer 1.8s infinite;
+  border-radius: var(--ether-radius-md);
+}
+
+.ether-metric {
+  background: var(--ether-bg-elevated);
+  border: 1px solid var(--ether-border-default);
+  border-radius: var(--ether-radius-md);
+  padding: 16px;
+  text-align: center;
+}
+.ether-metric-value {
+  font-family: var(--ether-font-display);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--ether-text-primary);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.ether-metric-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ether-text-muted);
+}
+
+/* Cadre résultat image */
+.ether-result-frame {
+  border-radius: var(--ether-radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--ether-violet-glow);
+  background: var(--ether-bg-elevated);
+  position: relative;
+}
+.ether-result-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: linear-gradient(transparent, rgba(10,10,11,0.9));
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Waveform audio */
+.ether-waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 40px;
+}
+.ether-waveform-bar {
+  width: 3px;
+  border-radius: var(--ether-radius-full);
+  background: var(--ether-violet);
+  opacity: 0.6;
+}
+.ether-waveform-bar.active {
+  background: var(--ether-cyan);
+  opacity: 1;
+}
+.ether-waveform-bar:nth-child(odd)  { animation: ether-wave 1.2s ease-in-out infinite; }
+.ether-waveform-bar:nth-child(even) { animation: ether-wave 1.2s ease-in-out infinite 0.3s; }
+
+/* Upload zone */
+.ether-upload-zone {
+  border: 2px dashed var(--ether-border-visible);
+  border-radius: var(--ether-radius-lg);
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--ether-t-normal);
+  background: var(--ether-bg-elevated);
+}
+.ether-upload-zone:hover,
+.ether-upload-zone.drag-over {
+  border-color: var(--ether-violet-border);
+  background: var(--ether-violet-faint);
+}
+
+/* Audio player custom */
+.ether-audio-player {
+  width: 100%;
+  background: var(--ether-bg-elevated);
+  border: 1px solid var(--ether-border-default);
+  border-radius: var(--ether-radius-lg);
+  padding: 16px 20px;
+}
+
+audio {
+  width: 100%;
+  accent-color: var(--ether-violet-light);
+  filter: invert(0);
+}
+
+/* ── 11. ANIMATIONS ──────────────────────────────────────────── */
+@keyframes ether-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px currentColor; }
+  50%       { opacity: 0.6; box-shadow: 0 0 20px currentColor; }
+}
+@keyframes ether-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ether-slide-in {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes ether-scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes ether-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+@keyframes ether-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes ether-wave {
+  0%, 100% { transform: scaleY(0.4); }
+  50%       { transform: scaleY(1); }
+}
+@keyframes ether-glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(138,43,226,0.2); }
+  50%       { box-shadow: 0 0 40px rgba(138,43,226,0.4), 0 0 80px rgba(0,245,255,0.1); }
+}
+
+.ether-animate-fade-in  { animation: ether-fade-in 0.4s ease both; }
+.ether-animate-slide-in { animation: ether-slide-in 0.4s ease both; }
+.ether-animate-scale-in { animation: ether-scale-in 0.3s ease both; }
+
+.ether-delay-1 { animation-delay: 0.1s; }
+.ether-delay-2 { animation-delay: 0.2s; }
+.ether-delay-3 { animation-delay: 0.3s; }
+.ether-delay-4 { animation-delay: 0.4s; }
+.ether-delay-5 { animation-delay: 0.5s; }
+
+/* ── 12. UTILITAIRES ─────────────────────────────────────────── */
+.ether-flex         { display: flex; }
+.ether-flex-center  { display: flex; align-items: center; }
+.ether-flex-between { display: flex; align-items: center; justify-content: space-between; }
+.ether-gap-sm  { gap: 8px; }
+.ether-gap-md  { gap: 16px; }
+.ether-gap-lg  { gap: 24px; }
+.ether-mt-sm   { margin-top: 8px; }
+.ether-mt-md   { margin-top: 16px; }
+.ether-mt-lg   { margin-top: 24px; }
+.ether-mt-xl   { margin-top: 40px; }
+.ether-mb-md   { margin-bottom: 16px; }
+.ether-mb-lg   { margin-bottom: 24px; }
+.ether-p-md    { padding: 16px; }
+.ether-p-lg    { padding: 24px; }
+.ether-w-full  { width: 100%; }
+.ether-text-center { text-align: center; }
+.ether-truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.ether-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.ether-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .ether-grid-2,
+  .ether-grid-3 { grid-template-columns: 1fr; }
+  .ether-container { padding: 0 16px; }
+  .ether-page { padding: 20px 16px; }
+  .ether-tabs { overflow-x: auto; }
+  .ether-hidden-mobile { display: none !important; }
+}
+
+/* Mouvement réduit */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
