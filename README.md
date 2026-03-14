@@ -159,3 +159,4 @@ docker stats
 docker compose exec backend sh
 ```
 # Studio-IA
+# test CI/CD
